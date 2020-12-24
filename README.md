@@ -1,0 +1,1 @@
+# My setup for oh-my-zsh .zshrc 
