@@ -107,3 +107,4 @@ complete -F __start_kubectl k
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+bindkey '^H' backward-kill-word
