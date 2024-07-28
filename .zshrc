@@ -110,4 +110,19 @@ complete -F __start_kubectl k
 alias gitclean='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 bindkey '^H' backward-kill-word
 alias gitcb='git rev-parse --abbrev-ref HEAD'
+gitsquash() {
+    if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo "Error: Not in a git repository"
+        return 1
+    fi
 
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+    temp_branch="${current_branch}-squashed"
+
+    git branch "$temp_branch" && \
+    git reset --hard origin/master && \
+    git merge --squash "$temp_branch" && \
+    git commit -m "Update branch with changes from master" && \
+    git branch -D "$temp_branch" && \
+    git push -f origin "$current_branch"
+}
