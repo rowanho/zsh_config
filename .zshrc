@@ -126,3 +126,7 @@ gitsquash() {
     git branch -D "$temp_branch" && \
     git push -f origin "$current_branch"
 }
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
