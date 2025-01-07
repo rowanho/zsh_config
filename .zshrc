@@ -72,6 +72,7 @@ plugins=(
     git
     zsh-autosuggestions
     kubectl
+    #kube-ps1
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -129,4 +130,4 @@ gitsquash() {
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
-
+PROMPT='$(kube_ps1)'$PROMPT
